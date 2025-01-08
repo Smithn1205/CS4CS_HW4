@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="HWK4.css">
+  <title>Homepage</title>
+</head>
+<body>
+  <h1>Welcome to my Homepage</h1>
+  <h2 style="text-align: center; font-family: cursive;">Personal Details</h2>
+  <form id="personal-form" onsubmit="return validation()">  
+    <div style="display: flex; justify-content: space-between;">
+      <!-- Left side -->
+      <div style="flex: 1;">
+        <label for="name">Name:<span style="color: red;">*</span></label>
+        <input class="input1" type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="middle-name">Middle Name:<span style="color: red;">*</span></label>
+        <input class="input1" type="text" id="middle-name" name="middle-name" placeholder="Enter your middle name" required>
+
+        <label for="surname">Surname:<span style="color: red;">*</span></label>
+        <input class="input1" type="text" id="surname" name="surname" placeholder="Enter your surname" required>
+
+        <label for="country">Country:<span style="color: red;">*</span></label>
+        <select id="country" name="country" required>
+          <option value="" selected disabled>Select your country</option>
+          <option value="germany">Germany</option>
+          <option value="india">India</option>
+          <option value="usa">USA</option>
+          <option value="uk">UK</option>
+          <option value="canada">Canada</option>
+          <option value="france">France</option>
+          <option value="spain">Spain</option>
+          <option value="australia">Australia</option>
+          <option value="turkey">Turkey</option>
+          <option value="egypt">Egypt</option>
+          <option value="uae">UAE</option>
+          <option value="mexico">Mexico</option>
+        </select>
+      </div>
+
+      <!--Right side--> 
+      <div style="flex: 1;">
+        <label for="matriculation-number">Matriculation Number:<span style="color: red;">*</span></label>
+        <input class="input1" type="text" id="matriculation-number" name="matriculation-number" placeholder="Enter matriculation number" required>
+
+        <label for="semester">Semester:<span style="color: red;">*</span></label>
+        <input class="input1" type="text" id="semester" name="semester" placeholder="Enter your semester" required>
+
+        <label for="program">Program:<span style="color: red;">*</span></label>
+        <select id="program" name="program" required>
+          <option value="" selected disabled>Select your program</option>
+          <option value="bachelor">Bachelor's</option>
+          <option value="master">Master's</option>
+          <option value="phd">Ph.D.</option>
+        </select>
+
+        <label for="started-in">Started In:<span style="color: red;">*</span></label>
+        <input class="input1" style="height: 16px;" type="date" id="started-in" name="started-in" required>
+      </div>
+    </div>
+
+    <h3>I have heard about this graduate program from:<span style="color: red;">*</span></h3>
+    <input style="margin-left: 5px;" class="input2" type="checkbox" name="heard-from" value="media">Media
+    <input class="input2" type="checkbox" name="heard-from" value="advertisement">Advertisement
+    <input class="input2" type="checkbox" name="heard-from" value="agency">Agency
+    <input class="input2" type="checkbox" name="heard-from" value="searchengine">Search Engine
+    <input class="input2" type="checkbox" name="heard-from" value="other">Other<br><br>
+
+    <h3>When I finish my studies, I will:<span style="color: red;">*</span></h3>
+    <input class="radio1" type="radio" name="afterstudy" value="return" required> Return to my country.<br>
+    <input class="radio1" type="radio" name="afterstudy" value="settle" required> Find a job and settle in Europe.<br>
+    <input class="radio1" type="radio" name="afterstudy" value="train" required> Do the practical training and decide.<br>
+
+    <h3>Feedback:</h3>
+    <textarea class="input3" name="feedback" placeholder="Please enter your valuable feedback ..." maxlength="500"></textarea><br><br><br>
+    
+    <button type="submit" style="margin-left: 25%;"> 
+      Submit
+    </button>
+    <button type="reset" style="margin-left: 8%;">
+      Clear
+    </button>
+  </form>
+  <footer>&copy; My Homepage.<br>I have done this project myself and will accept the consequences if found other ways.<br>My email address is <a href="mailto:smithnunes12@gmail.com">smithnunes12@gmail.com</a>.
+  </footer>
+
+  <script>
+    function validation() {
+      let isValid = true;
+      const errorMessages = document.querySelectorAll('.error-message');
+      errorMessages.forEach(msg => msg.remove());
+
+      const name = document.getElementById('name').value.trim();
+      const middleName = document.getElementById('middle-name').value.trim();
+      const surname = document.getElementById('surname').value.trim();
+      const matriculationNumber = document.getElementById('matriculation-number').value.trim();
+      const semester = document.getElementById('semester').value.trim();
+      const checkboxes = document.querySelectorAll('input[name="heard-from"]:checked');
+
+      const namePattern = /^[A-Za-z\s]+$/;
+      if (!name || !namePattern.test(name)) {
+        alert("Name should only contain alphabets and spaces.");
+        isValid = false;
+      }
+
+      if (!middleName || !namePattern.test(middleName)) {
+        alert("Middle name should only contain alphabets and spaces.");
+        isValid = false;
+      }
+
+      if (!surname || !namePattern.test(surname)) {
+        alert("Surname should only contain alphabets and spaces.");
+        isValid = false;
+      }
+
+      if (!matriculationNumber || matriculationNumber.length !== 8 || isNaN(matriculationNumber)) {
+        alert("Matriculation number must be exactly 8 digits.");
+        isValid = false;
+      }
+
+      if (!semester || semester < 1 || semester > 8) {
+        alert("Semester should be a number between 1 and 8.");
+        isValid = false;
+      }
+
+      if (checkboxes.length === 0) {
+        alert("Please select at least one option for how you heard about the graduate program.");
+        isValid = false;
+      }
+
+      if (isValid) {
+        window.location.href = "page2.html";
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
