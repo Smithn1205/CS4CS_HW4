@@ -56,7 +56,7 @@
           <option value="phd">Ph.D.</option>
         </select>
 
-        <label for="started-in">Started In:<span style="color: red;">*</span></label>
+        <label for="started-in">Started in:<span style="color: red;">*</span></label>
         <input class="input1" style="height: 16px;" type="date" id="started-in" name="started-in" required>
       </div>
     </div>
@@ -89,14 +89,13 @@
   <script>
     function validation() {
       let isValid = true;
-      const errorMessages = document.querySelectorAll('.error-message');
-      errorMessages.forEach(msg => msg.remove());
 
       const name = document.getElementById('name').value.trim();
       const middleName = document.getElementById('middle-name').value.trim();
       const surname = document.getElementById('surname').value.trim();
       const matriculationNumber = document.getElementById('matriculation-number').value.trim();
       const semester = document.getElementById('semester').value.trim();
+      const startedInDate = document.getElementById('started-in').value.trim();
       const checkboxes = document.querySelectorAll('input[name="heard-from"]:checked');
 
       const namePattern = /^[A-Za-z\s]+$/;
@@ -124,9 +123,16 @@
         alert("Semester should be a number between 1 and 8.");
         isValid = false;
       }
+      
+      const today = new Date();
+      const selectedDate = new Date(startedInDate);
+      if (selectedDate > today) {
+        alert("The 'Started in' date cannot be in the future.");
+        isValid = false;
+      }
 
       if (checkboxes.length === 0) {
-        alert("Please select at least one option for how you heard about the graduate program.");
+        alert("Please select at least one option.");
         isValid = false;
       }
 
